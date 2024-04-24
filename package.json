@@ -2,14 +2,14 @@
   "name": "watermark",
   "version": "1.0.0",
   "description": "",
-  "scripts": {
-    "dev": "parcel serve",
-    "watch": "parcel watch",
-    "build": "parcel build"
-  },
   "keywords": [],
-  "author": "uiolee (https://github.com/uiolee)",
   "license": "MPL-2.0",
+  "author": "uiolee (https://github.com/uiolee)",
+  "scripts": {
+    "build": "parcel build",
+    "dev": "parcel serve",
+    "watch": "parcel watch"
+  },
   "devDependencies": {
     "eslint": "^9.1.1",
     "parcel": "^2.12.0",
@@ -21,6 +21,7 @@
       "outputFormat": "esmodule",
       "isLibrary": false,
       "distDir": "./dist",
+      "publicUrl": ".",
       "context": "browser"
     }
   }
