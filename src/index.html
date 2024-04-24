@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <title>水印助手</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <style>
+      body {
+        margin: auto;
+        max-width: 60vh;
+      }
+
+      img {
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      canvas {
+        display: none;
+        width: 100%;
+        height: 0;
+      }
+
+      label,
+      a {
+        display: flex;
+        align-items: center;
+        margin-top: 8px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <p></p>
+      <label>
+        <input id="upload" type="file" accept="image/*" title="upload"
+      /></label>
+      <label>
+        水印文字：
+        <input id="content" type="text" value="仅供XX实名认证使用" />
+      </label>
+      <label>
+        水印颜色：
+        <input id="color" type="color" value="#ffffff" />
+      </label>
+      <label>
+        不透明度：
+        <input id="alpha" type="range" min="10" max="100" value="50" />
+      </label>
+      <label>
+        水印大小比：
+        <input id="size" type="range" min="3" max="10" value="5" />
+      </label>
+      <label>
+        水印间隔比：
+        <input id="gap" type="range" min="20" max="300" value="150" />
+      </label>
+      <label>
+        水印角度：
+        <input id="rotate" type="range" min="-70" max="70" value="-45" />
+      </label>
+      <label>
+        水印字体：
+        <input id="font" type="text" value="sans-serif" />
+      </label>
+      <a id="download" href="javascript:alert('请先打开图片')" download
+        >保存图片</a
+      >
+    </div>
+    <div id="preview">
+      <img
+        id="preview-img"
+        title="可长按或右键保存"
+        style="display: none"
+      />
+    </div>
+    <canvas id="canvas"></canvas>
+    <script src="./do.js" type="module"></script>
+  </body>
+</html>
