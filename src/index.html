@@ -2,7 +2,7 @@
 <html lang="zh">
   <head>
     <meta charset="UTF-8" />
-    <title>水印助手</title>
+    <title>文字水印助手</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <style>
       body {
@@ -34,6 +34,7 @@
     <div>
       <p></p>
       <label>
+        选择图像：
         <input id="upload" type="file" accept="image/*" title="upload"
       /></label>
       <label>
@@ -64,16 +65,12 @@
         水印字体：
         <input id="font" type="text" value="sans-serif" />
       </label>
-      <a id="download" href="javascript:alert('请先打开图片')" download
+      <a id="download" href="javascript:alert('请先选择图片')" download
         >保存图片</a
       >
     </div>
     <div id="preview">
-      <img
-        id="preview-img"
-        title="可长按或右键保存"
-        style="display: none"
-      />
+      <img id="preview-img" title="可长按或右键保存" style="display: none" />
     </div>
     <canvas id="canvas"></canvas>
     <script src="./do.js" type="module"></script>
