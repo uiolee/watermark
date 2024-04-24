@@ -4,7 +4,7 @@
 
 ## Demo 
 
-[https://uiolee.github.io/watermark/index.html](https://uiolee.github.io/watermark/index.html)
+[uiolee.github.io/watermark/](https://uiolee.github.io/watermark/)
 
 ## 改动
 
