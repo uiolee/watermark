@@ -4,7 +4,10 @@
 
 ## Demo
 
-[uiolee.github.io/watermark/](https://uiolee.github.io/watermark/)
+| Provider         | Url                                                                |
+| ---------------- | ------------------------------------------------------------------ |
+| Github Pages     | [uiolee.github.io/watermark/](https://uiolee.github.io/watermark/) |
+| Cloudflare Pages | [wzsy.pages.dev](https://wzsy.pages.dev/)                          |
 
 ## 改动
 
