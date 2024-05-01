@@ -4,75 +4,213 @@
     <meta charset="UTF-8" />
     <title>文字水印助手</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="./favicon.ico" />
+    <link rel="manifest" href="./manifest.json" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/picocss/2.0.6/pico.lime.min.css"
+      integrity="sha512-SjugNV5ktkML231+2t5D0BD2s35ICxV8+YsyPaVrhMZN/C6QD0uavuvBT/wKuu2cBUL5IYGCgWcXzbK4Un5vtA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <style>
       body {
-        margin: auto;
-        max-width: 60vh;
+        height: 100%;
       }
-
-      img {
-        width: 100%;
-        box-sizing: border-box;
-      }
-
       canvas {
         display: none;
         width: 100%;
         height: 0;
       }
-
-      label,
-      a {
+      #main {
+        padding: 0;
+        margin: 0;
         display: flex;
-        align-items: center;
-        margin-top: 8px;
+        flex-direction: column;
+      }
+      #setting {
+        overflow: hidden;
+        margin: 0 !important;
+      }
+      #preview {
+        position: sticky;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      #preview-img {
+        position: sticky;
+        width: 100%;
+      }
+
+      input,
+      article > header {
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      article > header > p {
+        margin: 0;
+      }
+      @media (min-width: 880px) {
+        #main {
+          flex-direction: row;
+        }
+        #setting {
+          flex: 0.5;
+          display: flex;
+          flex-direction: column;
+          max-width: 576px;
+          max-height: 100vh;
+        }
+        #preview {
+          flex: 1;
+        }
+      }
+      nav,
+      div[role="group"] {
+        overflow: hidden;
+      }
+      label {
+        display: inline;
       }
     </style>
   </head>
 
   <body>
-    <div>
-      <p></p>
-      <label>
-        选择图像：
-        <input id="upload" type="file" accept="image/*" title="upload"
-      /></label>
-      <label>
-        水印文字：
-        <input id="content" type="text" value="仅供XX实名认证使用" />
-      </label>
-      <label>
-        水印颜色：
-        <input id="color" type="color" value="#ffffff" />
-      </label>
-      <label>
-        不透明度：
-        <input id="alpha" type="range" min="10" max="100" value="50" />
-      </label>
-      <label>
-        水印大小比：
-        <input id="size" type="range" min="3" max="10" value="5" />
-      </label>
-      <label>
-        水印间隔比：
-        <input id="gap" type="range" min="20" max="300" value="150" />
-      </label>
-      <label>
-        水印角度：
-        <input id="rotate" type="range" min="-70" max="70" value="-45" />
-      </label>
-      <label>
-        水印字体：
-        <input id="font" type="text" value="sans-serif" />
-      </label>
-      <a id="download" href="javascript:alert('请先选择图片')" download
-        >保存图片</a
-      >
-    </div>
-    <div id="preview">
-      <img id="preview-img" title="可长按或右键保存" style="display: none" />
-    </div>
-    <canvas id="canvas"></canvas>
-    <script src="./do.js" type="module"></script>
+    <nav>
+      <ul>
+        <li>
+          <strong aria-busy="true">加载中...</strong>
+        </li>
+      </ul>
+      <ul>
+        <li><small></small></li>
+      </ul>
+      <ul>
+        <li><a href="#:~:text=选择图像：">选择图像</a></li>
+        <li><a href="#preview">预览</a></li>
+        <li><a href="#raw">原图</a></li>
+      </ul>
+    </nav>
+    <main class="container-fluid">
+      <div id="main">
+        <article id="setting">
+          <form>
+            <fieldset id="mark-setting">
+              <label>
+                不透明度：
+                <input id="alpha" type="range" min="10" max="100" value="50" />
+              </label>
+              <label>
+                水印大小比：
+                <input id="size" type="range" min="3" max="10" value="5" />
+              </label>
+              <label>
+                水印间隔比：
+                <input id="gap" type="range" min="20" max="300" value="150" />
+              </label>
+              <label>
+                水印角度：
+                <input
+                  id="rotate"
+                  type="range"
+                  min="-70"
+                  max="70"
+                  value="-45"
+                />
+              </label>
+              <label>
+                水印颜色：
+                <input id="color" type="color" value="#ffffff" />
+              </label>
+              <label>
+                水印字体：
+                <input id="font" type="text" value="sans-serif" />
+              </label>
+              <label>
+                水印文字：
+                <input id="content" type="text" value="仅供XX实名认证使用" />
+              </label>
+              <label>
+                选择图像：
+                <input
+                  id="upload"
+                  type="file"
+                  accept="image/*"
+                  title="upload"
+                />
+              </label>
+            </fieldset>
+
+            <fieldset>
+              <legend>输出格式:</legend>
+              <input type="radio" id="jpeg" name="format" checked />
+              <label for="jpeg">jpeg</label>
+              <input type="radio" id="png" name="format" />
+              <label for="png">png</label>
+              <input type="radio" id="webp" name="format" />
+              <label for="webp">webp</label>
+            </fieldset>
+
+            <fieldset>
+              <label>
+                <input
+                  id="live"
+                  name="live"
+                  type="checkbox"
+                  role="switch"
+                  checked
+                />
+                即时预览
+              </label>
+            </fieldset>
+          </form>
+
+          <div role="group">
+            <!-- <button id="upload" disabled>Choose</button> -->
+            <button id="action" disabled>预览</button>
+            <!-- <button id="download" disabled>保存</button> -->
+          </div>
+        </article>
+
+        <article id="preview">
+          <article>
+            <header>
+              <p>预览</p>
+            </header>
+            <small id="preview-info"></small>
+            <img
+              id="preview-img"
+              title="可长按或右键保存"
+              style="display: none"
+            />
+          </article>
+
+          <article id="raw">
+            <header>
+              <p>原图</p>
+            </header>
+            <small id="raw-info"></small>
+            <img id="raw-img" title="原图" style="display: none" />
+          </article>
+
+          <canvas id="canvas"></canvas>
+        </article>
+      </div>
+    </main>
+
+    <footer>
+      <nav>
+        <a
+          href="https://github.com/uiolee/watermark/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Github</a
+        >
+        <a href="#top">Top</a>
+      </nav>
+    </footer>
+
+    <script src="./do.js" type="module" defer></script>
   </body>
 </html>
