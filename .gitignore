@@ -149,3 +149,5 @@ dist
 /yarn.lock
 
 public
+parcel-trace-*.json
+profile-*.trace

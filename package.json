@@ -6,9 +6,10 @@
   "license": "MPL-2.0",
   "author": "uiolee (https://github.com/uiolee)",
   "scripts": {
-    "build": "parcel build",
-    "dev": "parcel serve",
-    "watch": "parcel watch"
+    "build": "parcel build --no-cache --detailed-report",
+    "dev": "parcel serve --no-cache --no-autoinstall --watch-dir src",
+    "sync": "browser-sync dist -w -f dist --open external",
+    "watch": "parcel watch --no-cache --watch-dir src --no-hmr"
   },
   "devDependencies": {
     "eslint": "^9.1.1",
