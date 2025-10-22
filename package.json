@@ -6,7 +6,7 @@
   "license": "MPL-2.0",
   "author": "uiolee (https://github.com/uiolee)",
   "scripts": {
-    "build": "parcel build --no-cache --detailed-report",
+    "build": "rm -rf dist/** && parcel build --no-cache --detailed-report",
     "dev": "parcel serve --no-cache --no-autoinstall --watch-dir src",
     "sync": "browser-sync dist -w -f dist --open external",
     "watch": "parcel watch --no-cache --watch-dir src --no-hmr"
@@ -20,6 +20,11 @@
     "postcss": "^8.4.38",
     "prettier": "^3.2.5"
   },
+  "peerDependencies": {
+    "htmlnano": "^2.1.1",
+    "postcss": "^8.4.38"
+  },
+  "packageManager": "pnpm@10.19.0",
   "targets": {
     "frontend": {
       "source": "src/index.html",
@@ -29,9 +34,5 @@
       "publicUrl": ".",
       "context": "browser"
     }
-  },
-  "peerDependencies": {
-    "htmlnano": "^2.1.1",
-    "postcss": "^8.4.38"
   }
 }

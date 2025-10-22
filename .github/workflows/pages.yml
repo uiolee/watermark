@@ -25,7 +25,6 @@ concurrency:
 
 env:
   default_node_version: "lts/*"
-  default_pnpm_version: 8
 
 jobs:
   # Single deploy job since we're just deploying
@@ -42,10 +41,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v3
+      - uses: pnpm/action-setup@v4
         name: Install pnpm
-        with:
-          version: ${{ env.default_pnpm_version }}
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.default_node_version }}
